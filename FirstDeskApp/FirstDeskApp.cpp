@@ -82,7 +82,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 }
 
 
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
+BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)/////////////инициализаци€ экземпл€ра
 {
    hInst = hInstance; // Store instance handle in our global variable
 
@@ -136,7 +136,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)/
         }
         break;
     case WM_DESTROY://////закрытие окна
-        PostQuitMessage(0);/////очиска очереди сообщений
+        PostQuitMessage(0);/////помещает в очередб сообщений WM_QUIT и после обработки работа программы прекращаетс€ с кодом 0
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
