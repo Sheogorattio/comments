@@ -14,7 +14,7 @@ WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
-LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);/////////////////тут прототип оконной процедуры
+LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);/////////////////this window procedure prototype
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -63,26 +63,26 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     WNDCLASSEXW wcex;
 
 
-    //////////////////////ниже определение класса окна
+    //////////////////////window's class definition
     wcex.cbSize = sizeof(WNDCLASSEX);
 
     wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;///////адрес оконной процедуры
+    wcex.lpfnWndProc    = WndProc;///////address of the window proceduredure
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
-    wcex.hInstance      = hInstance;/////дескриптор приложени€
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_FIRSTDESKAPP)); //////стандартна€ иконка
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);/////// загрузка курсора
-    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);/////////фон окна цвета color_window+1
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_FIRSTDESKAPP);////////определение меню
-    wcex.lpszClassName  = szWindowClass;//////// им€ класса окна
-    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));/////////маленька€ иконка
+    wcex.hInstance      = hInstance;/////handle of this application
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_FIRSTDESKAPP)); //////standart ico
+    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);/////// cursor definition
+    wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);/////////background color of the window (color is color_window+1)
+    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_FIRSTDESKAPP);////////menu definition
+    wcex.lpszClassName  = szWindowClass;//////// name of the window class
+    wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));/////////small ico
 
     return RegisterClassExW(&wcex);
 }
 
 
-BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)/////////////инициализаци€ экземпл€ра
+BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)/////////////initialisation of the instance
 {
    hInst = hInstance; // Store instance handle in our global variable
 
@@ -106,7 +106,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)/////////////инициализаци€ э
 //  WM_DESTROY  - post a quit message and return
 //
 //
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)/////условный аналог мейна. вызываетс€ самой системой
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)/////it is our window procedure. this functions is always called by the system
 {
     switch (message)
     {
@@ -135,8 +135,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)/
             EndPaint(hWnd, &ps);
         }
         break;
-    case WM_DESTROY://////закрытие окна
-        PostQuitMessage(0);/////помещает в очередб сообщений WM_QUIT и после обработки работа программы прекращаетс€ с кодом 0
+    case WM_DESTROY://////close this window
+        PostQuitMessage(0);/////palce WM_QUIT to the message queue
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
@@ -144,7 +144,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)/
     return 0;
 }
 
-// Message handler for about box.
+// Message handler for about box
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     UNREFERENCED_PARAMETER(lParam);
